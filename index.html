@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data:; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; media-src 'none'; frame-src 'none'; font-src 'none'; form-action 'none'; base-uri 'none'">
+  <meta name="description" content="福州大学材料科学与工程学院学生基础信息核验页面">
+  <title>学生信息核验平台</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2317476f'/%3E%3Cpath d='M32 11 49 18v13c0 11-7 18-17 22-10-4-17-11-17-22V18l17-7Z' fill='white'/%3E%3Cpath d='m24 32 6 6 11-13' fill='none' stroke='%2317476f' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="top-line" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="institution">
+      <div class="logo-box" aria-label="福州大学 Logo 占位区域">
+        <span>福州大学<br>Logo</span>
+      </div>
+      <div class="institution-copy">
+        <strong>福州大学</strong>
+        <span>材料科学与工程学院</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="service-name">学生信息服务</div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <div class="breadcrumb" id="breadcrumb"><span>首页</span><i>›</i><span>学生事务</span><i>›</i><strong>信息核验</strong></div>
+
+    <section class="panel stage is-active" id="stage-one" data-stage="1" aria-labelledby="stage-one-title">
+      <div class="panel-heading">
+        <div class="portal-tabs" aria-hidden="true"><span class="is-current">信息确认</span></div>
+        <p class="system-tag">学生事务 · 信息核验</p>
+        <h1 id="stage-one-title">学生信息核验平台</h1>
+        <p class="subtitle">2026—2027学年学生基础信息补充核验</p>
+      </div>
+
+      <dl class="service-meta">
+        <div><dt>发布部门</dt><dd>学院学生工作办公室</dd></div>
+        <div><dt>办理对象</dt><dd>本院在校学生</dd></div>
+        <div><dt>业务类型</dt><dd>基础信息核验</dd></div>
+        <div><dt>当前状态</dt><dd class="pending-text">待确认</dd></div>
+      </dl>
+
+      <form id="info-form" novalidate autocomplete="off">
+        <div class="field">
+          <label for="student-name">姓名</label>
+          <input id="student-name" type="text" maxlength="20" placeholder="请输入姓名" autocomplete="off">
+          <p class="field-error" id="name-error" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="student-id">学号</label>
+          <input id="student-id" type="text" placeholder="请输入学号" autocomplete="off">
+          <p class="field-error" id="id-error" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="student-phone">手机号</label>
+          <input id="student-phone" type="tel" inputmode="numeric" maxlength="11" placeholder="请输入本人手机号" autocomplete="off">
+          <p class="field-error" id="phone-error" aria-live="polite"></p>
+        </div>
+        <button class="primary-button" type="submit">确认信息并继续</button>
+      </form>
+    </section>
+
+    <section class="panel stage" id="stage-two" data-stage="2" aria-labelledby="stage-two-title" hidden>
+      <div class="panel-heading">
+        <div class="portal-tabs" aria-hidden="true"><span>信息确认</span><span class="is-current">身份核验</span></div>
+        <p class="system-tag">安全校验</p>
+        <h1 id="stage-two-title">身份确认</h1>
+        <p class="subtitle">请完成本次信息确认操作</p>
+      </div>
+
+      <p class="intro">为确保当前信息确认操作由学生本人完成，需要进行一次身份验证。</p>
+      <div class="masked-phone">
+        <span>手机号</span>
+        <strong id="masked-phone-value">1**********</strong>
+      </div>
+
+      <div class="field">
+        <label for="verification-code">短信验证码</label>
+        <div class="code-row">
+          <input id="verification-code" type="text" inputmode="numeric" maxlength="6" placeholder="请输入验证码" autocomplete="off">
+          <button class="code-button" id="request-code" type="button">获取验证码</button>
+        </div>
+        <p class="field-note">验证码有效期为5分钟，请勿重复获取。</p>
+      </div>
+
+      <button class="primary-button" id="verify-submit" type="button">验证并提交</button>
+      <button class="text-button" id="back-to-info" type="button">返回修改信息</button>
+    </section>
+
+    <section class="reveal stage" id="stage-three" data-stage="3" aria-labelledby="stage-three-title" hidden>
+      <div class="warning-hero">
+        <div class="warning-symbol" aria-hidden="true">!</div>
+        <p class="reveal-label">反诈模拟演练</p>
+        <h1 id="stage-three-title">等等，你发现哪里不对了吗？</h1>
+        <p>这是一次用于主题班会的反诈模拟演练。</p>
+        <p>本页面没有保存你填写的任何信息，也没有发送短信、获取密码或上传个人数据。</p>
+      </div>
+
+      <div class="impact-message">如果这是真实诈骗，你刚刚可能已经进入了骗子设计的信息收集流程。</div>
+
+      <section class="risk-section" aria-labelledby="risk-title">
+        <div class="section-title"><span>风险复盘</span><h2 id="risk-title">刚才的页面藏着这些风险点</h2></div>
+        <div class="risk-grid">
+          <article><span>01</span><h3>冒充熟人</h3><p>群消息看起来像班长发送，并不代表发送账号一定是真实的。收到涉及信息填写的通知时，应检查账号身份。</p></article>
+          <article><span>02</span><h3>制造时间压力</h3><p>“今晚22:30前完成”“逾期可能影响材料”等措辞，会让人来不及思考。</p></article>
+          <article><span>03</span><h3>陌生网址</h3><p>校园通知中的链接是否属于学校官方域名，是判断真实性的重要依据之一。</p></article>
+          <article><span>04</span><h3>验证码</h3><p>普通学生信息确认通常不需要短信验证码。验证码属于高度敏感信息。</p></article>
+          <article><span>05</span><h3>缺乏二次核实</h3><p>涉及个人信息、账号、资金的通知，应通过辅导员、学校官网或本人其他联系方式再次确认。</p></article>
+        </div>
+      </section>
+
+      <section class="awareness-card" aria-labelledby="awareness-title">
+        <div class="meter" aria-hidden="true"><div class="meter-fill" id="meter-fill"></div></div>
+        <div class="awareness-copy">
+          <p class="reveal-label">演练反馈 · 不代表科学测评</p>
+          <h2 id="awareness-title">你的反诈警觉度</h2>
+          <p id="result-message">你已经进入了身份验证环节。现实中遇到这一步，应立即停止操作并通过官方渠道核实。</p>
+        </div>
+      </section>
+
+      <div class="final-reminder">
+        <strong>熟人发来的链接，也要核实。</strong>
+        <span>验证码、密码、银行卡信息，不通过陌生链接填写。</span>
+      </div>
+
+      <button class="restart-button" id="restart-demo" type="button">重新体验演练</button>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p id="footer-primary">© 2026 福州大学材料科学与工程学院 · 学生信息服务</p>
+    <div id="reveal-footer" hidden>
+      <p>本页面为反诈教育模拟页面，并非福州大学真实业务系统。</p>
+      <p>本次演练未采集你的密码、验证码或其他敏感个人信息。</p>
+    </div>
+  </footer>
+
+  <div class="loading-mask" id="loading-mask" hidden aria-live="polite" aria-label="正在发送">
+    <div class="loading-card"><span class="spinner" aria-hidden="true"></span><strong>正在发送……</strong></div>
+  </div>
+</body>
+</html>
